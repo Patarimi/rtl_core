@@ -10,8 +10,9 @@ module spi_device
 
 	parameter SPI_ADDR_WIDTH = 3
 ) (
-	//system signal
-
+`ifdef USE_POWER_PINS
+	inout vcc, vss,
+`endif
 	//spi interface
 	input 	spi_mosi,
 	input 	spi_clk,
@@ -32,7 +33,7 @@ localparam [1:0]
 	tsfr_data = 2;
 //store the pres_state and the future state
 reg [1:0] pres_state, next_state;
-//store elapsed time
+
 function integer max(input integer a, b);
 begin
 	if(a > b) begin
@@ -41,7 +42,7 @@ begin
 		max = b;
 	end
 endfunction
-
+//store elapsed time
 reg [$clog2(max(SPI_CMD_WIDTH, SPI_DATA_WIDTH))-1:0] t;
 
 //store mosi value during read_cmd state
@@ -107,3 +108,42 @@ always @* begin
 end
 endmodule
 
+module spi_register
+#(
+	parameter REG_DATA_WIDTH = 8,
+	parameter REG_ADDR_WIDTH = 3,
+	parameter REG_ADDR = 0
+)(
+`ifdef USE_POWER_PINS
+	inout vcc, vss,
+`endif
+	//register interface
+	inout reg_bus,
+	input [REG_ADDR_WIDTH-1:0]reg_addr,
+	input reg_dir,
+	input reg_clk,
+	output reg [REG_DATA_WIDTH-1:0]reg_data
+);
+
+//store elapsed time
+reg [$clog2(REG_DATA_WIDTH)-1:0] t;
+//keep track of time
+always @(posedge reg_clk) begin
+	if (t >= REG_DATA_WIDTH)
+		t <= 0;
+	else
+		t <= t + 1;
+end
+
+always @* begin
+	if (reg_addr == REG_ADDR) begin
+		if (reg_dir) begin
+			reg_data[t] = reg_bus;
+		end else begin
+			reg_bus = reg_data[t];
+		end
+	end
+end
+endmodule
+
+`default_nettype wire
