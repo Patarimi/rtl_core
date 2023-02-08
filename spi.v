@@ -7,11 +7,10 @@ module spi_device
 	parameter SPI_CMD_WIDTH = 8,
 	// and the data (read mode -> reg_bus write to miso, write mode -> mosi write to reg_bus)
 	parameter SPI_DATA_WIDTH = 8,
-
 	parameter SPI_ADDR_WIDTH = 3
 ) (
 `ifdef USE_POWER_PINS
-	inout vcc, vss,
+	inout vccd1, vssd1,
 `endif
 	//spi interface
 	input 	spi_mosi,
@@ -20,10 +19,10 @@ module spi_device
 	output reg  spi_miso,
 
 	//registers interface
-	inout 	   reg_bus,
-	output reg [SPI_ADDR_WIDTH-1:0]reg_addr,
-	output reg reg_dir,
-	output 	   reg_clk
+	inout      reg_bus,
+	output     [SPI_ADDR_WIDTH-1:0]reg_addr,
+	output     reg_dir, // 1 if write into the register
+	output reg reg_clk
 );
 
 //list of state in the machine
@@ -43,32 +42,27 @@ begin
 	end
 endfunction
 //store elapsed time
-reg [$clog2(max(SPI_CMD_WIDTH, SPI_DATA_WIDTH))-1:0] t;
+reg [$clog2(max(SPI_CMD_WIDTH, SPI_DATA_WIDTH)):0] t;
 
 //store mosi value during read_cmd state
 reg [SPI_CMD_WIDTH:0] reg_cmd;
+// store reg_bus value during trsf_state
+reg reg_mosi;
 //trame composition
 assign reg_dir = reg_cmd[0];
 assign reg_addr = reg_cmd[SPI_ADDR_WIDTH:1];
+//reg_bus is high_z during writing
+assign reg_bus = (reg_dir == 1) ? reg_mosi : 'bz;
 
-
-//refresh state on clk edge
-always @(posedge spi_clk, posedge spi_sel) begin
+//refresh state on clk edge and keep track of time
+always @(negedge spi_clk) begin
 	if (spi_sel) begin
 		pres_state <= iddle;
-	end
-	else begin
-		pres_state <= next_state;
-	end
-end
-
-//keep track of time
-always @(posedge spi_clk, posedge spi_sel) begin
-	if (spi_sel) begin
 		t <= 0;
 	end
 	else begin
-		if (pres_state != next_state)
+		pres_state <= next_state;
+		if ((pres_state != next_state) || (pres_state == iddle))
 			t <= 0;
 		else
 			t <= t + 1;
@@ -81,30 +75,34 @@ always @* begin
 	case (pres_state)
 		iddle : begin
 			reg_cmd = 0;
-			reg_clk = 0;
+			reg_clk = 1;
 			if (!spi_sel) begin
 				next_state = read_cmd;
 			end
 		end
 		read_cmd : begin
-			reg_cmd[t] = spi_mosi;
-			if (t >= SPI_CMD_WIDTH) begin
+			if (t >= SPI_CMD_WIDTH-1) begin
 				next_state = tsfr_data;
 			end
 		end
 		tsfr_data : begin
 			reg_clk = spi_clk;
-			if (reg_dir) begin
-				reg_bus = spi_mosi;
-			end
-			else begin
+			if (~reg_dir) begin
 				spi_miso = reg_bus;
+		    end
+			else begin
+			    reg_mosi = spi_mosi;
 			end
-			if (t >= SPI_DATA_WIDTH) begin
+			if (t >= SPI_DATA_WIDTH-1) begin
 				next_state = read_cmd;
 			end
 		end
 	endcase
+end
+always @(posedge spi_clk) begin
+    if (pres_state == read_cmd) begin
+        reg_cmd[t] <= spi_mosi;
+    end
 end
 endmodule
 
@@ -115,7 +113,7 @@ module spi_register
 	parameter REG_ADDR = 0
 )(
 `ifdef USE_POWER_PINS
-	inout vcc, vss,
+	inout vccd1, vssd1,
 `endif
 	//register interface
 	inout reg_bus,
@@ -126,22 +124,28 @@ module spi_register
 );
 
 //store elapsed time
-reg [$clog2(REG_DATA_WIDTH)-1:0] t;
+reg [$clog2(REG_DATA_WIDTH):0] t;
+reg data_t;
+//reg_bus is high_z during writing
+assign reg_bus = (reg_dir == 0) ? data_t : 1'bz;
+
 //keep track of time
-always @(posedge reg_clk) begin
-	if (t >= REG_DATA_WIDTH)
-		t <= 0;
-	else
+always @(negedge reg_clk) begin
+	if (t < REG_DATA_WIDTH-1)
 		t <= t + 1;
+	else
+		t <= 0;
 end
 
-always @* begin
-	if (reg_addr == REG_ADDR) begin
-		if (reg_dir) begin
-			reg_data[t] = reg_bus;
-		end else begin
-			reg_bus = reg_data[t];
-		end
+always @(t) begin
+	if ((reg_addr == REG_ADDR) && (reg_dir == 1)) begin
+			reg_data[REG_DATA_WIDTH-t-1] = reg_bus;
+	end
+end
+
+always @(posedge reg_clk) begin
+	if ((reg_addr == REG_ADDR) && (reg_dir == 0)) begin
+			data_t = reg_data[REG_DATA_WIDTH-t-1];
 	end
 end
 endmodule
