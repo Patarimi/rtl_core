@@ -1,0 +1,37 @@
+name: CI for verilog files
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: Install Iverilog
+        run: sudo apt-get install iverilog
+
+      - name: Run Test
+        run: |
+          cd spi_device
+          iverilog -l ./spi.v ./spi_tb.v-o spi.out
+# fails if no error message are present in the bench.
+          if grep -q "Error" ./spi_tb.v; then exit 1; fi
+          ./spi.out >> spi.res
+# fails if error message found in the simulation log.
+          if grep -q "Error" ./spi.res; then exit 1; fi
