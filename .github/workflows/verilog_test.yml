@@ -30,8 +30,8 @@ jobs:
         run: |
           cd spi_device
           iverilog -l ./spi.v ./spi_tb.v-o spi.out
-# fails if no error message are present in the bench.
+          # fails if no error message are present in the bench.
           if grep -q "Error" ./spi_tb.v; then exit 1; fi
           ./spi.out >> spi.res
-# fails if error message found in the simulation log.
+          # fails if error message found in the simulation log.
           if grep -q "Error" ./spi.res; then exit 1; fi
