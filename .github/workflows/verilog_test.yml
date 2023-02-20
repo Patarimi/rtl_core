@@ -29,7 +29,7 @@ jobs:
       - name: Run Test
         run: |
           cd spi_device
-          iverilog -l ./spi_device.v ./spi_device_tb.v-o spi_device.out
+          iverilog -l ./spi_device.v ./spi_device_tb.v -o spi_device.out
           # fails if no error message are present in the bench.
           if grep -q "Error" ./spi_device_tb.v; then exit 1; fi
           ./spi_device.out >> spi_device.res
