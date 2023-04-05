@@ -28,10 +28,4 @@ jobs:
           conda install -c conda-forge iverilog
       - name: Run Test
         run: |
-          cd spi_device
-          iverilog -l ./spi_device.v ./spi_device_tb.v -o spi_device.out
-          # fails if no error message are present in the bench.
-          if ! grep -q "failed" ./spi_device_tb.v; then exit 1; fi
-          ./spi_device.out >> spi_device.res
-          # fails if error message found in the simulation log.
-          if grep -q "failed" ./spi_device.res; then exit 1; fi
+          make spi_device-test
