@@ -5,3 +5,8 @@
 	@./$*/$*.out >> ./$*/$*.res
 	@# fails if error message found in the simulation log.
 	@if grep -q "failed" ./$*/$*.res; then echo "$* failed"; exit 1; fi
+
+.PHONY:clean
+clean:
+	@-rm -r ./*.res ./*.out ./*.vcd
+
