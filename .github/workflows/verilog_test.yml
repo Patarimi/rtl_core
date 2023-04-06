@@ -29,4 +29,4 @@ jobs:
       - name: Run Test
         run: |
           make spi_device-test
-          make sigma_delta_2
+          make sigma_delta_2-test
