@@ -28,5 +28,4 @@ jobs:
           conda install -c conda-forge iverilog
       - name: Run Test
         run: |
-          make spi_device-test
-          make sigma_delta_2-test
+          make test-all
