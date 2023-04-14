@@ -2,3 +2,7 @@
 *.out
 *.vcd
 .idea
+*/__pycache__/
+*/sim_build
+*.xml
+
