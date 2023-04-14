@@ -26,6 +26,7 @@ jobs:
       - name: Install Iverilog
         run: |
           conda install -c conda-forge iverilog
+          pip install cocotb
       - name: Run Test
         run: |
           make test-all
