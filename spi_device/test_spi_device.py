@@ -21,13 +21,13 @@ async def test_device(dut):
 
 
 def get_trame(w_nr, addr, data):
-    return w_nr+addr+"0000"+data
+    return w_nr + addr + "0000" + data
 
 
 async def program(data, dut):
     for i in range(16):
         await RisingEdge(dut.spi_clk)
-        dut.spi_mosi.value = int(data[i],2)
+        dut.spi_mosi.value = int(data[i], 2)
         if i > 8:
-	        await FallingEdge(dut.spi_clk)
-        	assert dut.reg_bus.value == int(data[i],2)
+            await FallingEdge(dut.spi_clk)
+            assert dut.reg_bus.value == int(data[i], 2)
