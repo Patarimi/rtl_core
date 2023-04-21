@@ -12,4 +12,3 @@ async def fonctionnal_test(dut):
     dut.rst_n.value = 1
     await Timer(512, units="ns")
     assert dut.dec_out.value == 255
-
