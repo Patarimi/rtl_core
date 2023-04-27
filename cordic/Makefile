@@ -3,7 +3,7 @@ TOPLEVEL_LANG ?= verilog
 
 VERILOG_SOURCES += $(PWD)/cordic.v
 
-TOPLEVEL = atan_table
+TOPLEVEL = cordic_core
 
 MODULE = test_cordic
 

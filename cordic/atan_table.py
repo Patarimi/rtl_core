@@ -6,7 +6,7 @@ def f_point(n: float, shift: int):
     """
     Convert a float to a fixed point integer.
     """
-    return int(n * 2**shift)
+    return int(round(n * 2**shift, 0))
 
 
 def verilog_b(n: float, resolution: int):
