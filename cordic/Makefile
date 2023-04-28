@@ -3,7 +3,7 @@ TOPLEVEL_LANG ?= verilog
 
 VERILOG_SOURCES += $(PWD)/cordic.v
 
-TOPLEVEL = cordic_core
+TOPLEVEL = cordic_pipelined
 
 MODULE = test_cordic
 

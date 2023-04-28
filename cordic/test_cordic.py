@@ -10,10 +10,10 @@ def to_float(fixed: int, res: int, pos: int = 2) -> float:
     return round(int(fixed) * 2 ** (pos - res), 3)
 
 
-@cocotb.test()
+"""@cocotb.test()
 async def test_cordic_core(dut):
-    res = 16
-    step = 14
+    res = dut.BITS.value
+    step = dut.STEPS.value
     buff = (pi / 3, 1, 0)
     print(buff)
     dut.Bin.value = f_point(buff[0], res - 2)
@@ -40,4 +40,15 @@ async def test_cordic_core(dut):
         assert to_float(dut.Yout, res) == round(buff[2], 3)
         dut.Bin.value = dut.Bout.value
         dut.Xin.value = dut.Xout.value
-        dut.Yin.value = dut.Yout.value
+        dut.Yin.value = dut.Yout.value"""
+
+@cocotb.test()
+async def test_cordic_pipelined(dut):
+	angle = pi/3
+	res = dut.BITS.value
+	step = dut.STEPS.value
+	dut.angle.value = f_point(angle, res - 2)
+	await Timer(4, "ns")
+	assert to_float(dut.sinus, res) == round(cos(pi/2-angle)/0.60725293651701, 3)
+	assert to_float(dut.cosinus, res) == round(cos(angle)/0.60725293651701, 3)
+	

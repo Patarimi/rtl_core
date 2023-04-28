@@ -31,4 +31,5 @@ if __name__ == "__main__":
         print(f"{int(resolution/4)}'h{i:x} : atan <= {verilog_b(atan_i, resolution)};")
         cumul *= 1 / math.sqrt(1 + 2 ** (-2 * i))
     print(f"Cumul: {verilog_b(cumul, resolution)}")
-    print(f"{verilog_b(2*math.pi, resolution)}")
+    print(f"pi  ={verilog_b(math.pi, resolution)}")
+    print(f"pi/2={verilog_b(math.pi/2, resolution)}")
