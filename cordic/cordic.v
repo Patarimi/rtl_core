@@ -1,9 +1,7 @@
-`include "../counter/counter.v"
-
 module cordic_pipelined
 #(
 	parameter BITS = 16,
-	parameter STEPS = 14
+	parameter STEPS = 15
 )
 (
 	input signed [BITS:0] angle, // angle to be compute between -pi and pi
@@ -28,13 +26,14 @@ assign sinus[BITS:0] = {1'b0, Ym[STEPS]};
 generate
 genvar i;
 	for (i=0; i < STEPS; i = i+1) begin
-		cordic_core #(.BITS(BITS), .STEPS(STEPS)) c_core (.Bin(beta[i]),
-														.Xin(Xm[i]),
-														.Yin(Ym[i]),
-														.step(i),
-														.Bout(beta[i+1]),
-														.Xout(Xm[i+1]),
-														.Yout(Ym[i+1]));
+		cordic_core #(.BITS(BITS), .STEPS(STEPS))
+			c_core (.Bin(beta[i]),
+					.Xin(Xm[i]),
+					.Yin(Ym[i]),
+					.step(i),
+					.Bout(beta[i+1]),
+					.Xout(Xm[i+1]),
+					.Yout(Ym[i+1]));
 	end 
 endgenerate
 
@@ -69,7 +68,7 @@ always @* begin
 		Bout <= atan + Bin;
 	end else begin
 		Xout <= Xin - (Yin >> step);
-		Yout <= (Xin >> step) + Yin;
+		Yout <= Yin + (Xin >> step);
 		Bout <= Bin - atan;
 	end
 end

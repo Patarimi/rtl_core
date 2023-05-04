@@ -1,7 +1,7 @@
-import cocotb
+import cocotb, os
 from cocotb.triggers import Timer, FallingEdge
 from cocotb.clock import Clock
-
+from cocotb_test.simulator import run
 
 @cocotb.test()
 async def fonctionnal_test(dut):
@@ -17,3 +17,12 @@ async def fonctionnal_test(dut):
             await FallingEdge(dut.clk)
             cnt += dut.dout.value
         assert cnt == 128 or cnt == 129
+        
+def test_sigma_delta_2():
+	run(
+		verilog_sources=["sigma_delta_2/sigma_delta_2.v"],
+		toplevel="sdm_2o",
+		module="test_sigma_delta_2",
+		timescale="1ns/1ps",
+		work_dir=os.path.join(os.curdir, "sigma_delta_2"),
+	)
