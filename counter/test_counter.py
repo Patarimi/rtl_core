@@ -1,6 +1,8 @@
 import cocotb
+import os
 from cocotb.triggers import Timer, FallingEdge
 from cocotb.clock import Clock
+from cocotb_test.simulator import run
 
 
 @cocotb.test()
@@ -23,3 +25,12 @@ async def fonctionnal_test_n(dut, incr):
     await FallingEdge(dut.clk)
     dut._log.info(f"{dut.count.value=}")
     assert dut.count.value == 21 * incr
+
+def test_counter():
+	run(
+		verilog_sources=["counter/counter.v"],
+		toplevel="counter",
+		module="test_counter",
+		timescale="1ns/1ps",
+		work_dir=os.path.join(os.curdir, "cordic"),
+	)
