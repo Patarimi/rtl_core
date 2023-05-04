@@ -30,7 +30,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          poetry install --no-interaction
+          poetry install --no-interaction --no-root
       - name: Run Test
         run: |
           poetry run pytest
