@@ -12,16 +12,24 @@ module cordic_pipelined
 reg signed [BITS:0] beta [STEPS:0];
 reg [BITS-1:0] Xm [STEPS:0];
 reg [BITS-1:0] Ym [STEPS:0];
+wire [BITS:0] cos, sin;
+reg [BITS:0] ang;
 
 // pi  =16'b1100100100010000;
 // pi/2=16'b0110010010001000;
 
-assign beta[0] = angle;
+assign beta[0] = ang;
 assign Xm[0] = {2'b1, 14'b0};
 assign Ym[0] = {16'b0};
-assign cosinus[BITS:0] = {1'b0, Xm[STEPS]};
-assign sinus[BITS:0] = {1'b0, Ym[STEPS]};
+assign cos[BITS:0] = {1'b0, Xm[STEPS]};
+assign sin[BITS:0] = {1'b0, Ym[STEPS]};
 
+always @(posedge clk) begin
+	ang <= angle;
+	sinus <= sin;
+	cosinus <= cos;
+end
+	
 
 generate
 genvar i;

@@ -3,6 +3,6 @@
 *.vcd
 .idea
 *__pycache__
-*/sim_build
+*sim_build
 *.xml
 
