@@ -1,6 +1,6 @@
 from math import atan, cos, pi, sin
 import cocotb
-from cocotb.triggers import Timer, ClockCycles
+from cocotb.triggers import Timer, ClockCycles, FallingEdge
 from cocotb.clock import Clock
 from atan_table import f_point
 
@@ -37,13 +37,12 @@ async def test_cordic_core(dut):
                 )
             buff = tmp
             await Timer(1, "ns")
-            assert int(dut.atan) == f_point(atan(2**-i), res-2)
-            assert abs(int(dut.Xout) - f_point(buff[1], res-2)) <= 2
-            assert abs(int(dut.Yout) - f_point(buff[2], res-2)) <= 2
+            assert int(dut.atan) == f_point(atan(2**-i), res - 2)
+            assert abs(int(dut.Xout) - f_point(buff[1], res - 2)) <= 2
+            assert abs(int(dut.Yout) - f_point(buff[2], res - 2)) <= 2
             print(f"Xin: {to_float(dut.Xin.value, res)* 0.6072540283203125}")
             print(f"Yin: {to_float(dut.Yin.value, res)* 0.6072540283203125}")
             print(f"Bin: {to_float(dut.Bin.value, res)/pi}")
-		    
             dut.Bin.value = dut.Bout.value
             dut.Xin.value = dut.Xout.value
             dut.Yin.value = dut.Yout.value
@@ -56,6 +55,11 @@ async def test_cordic_pipelined(dut):
         res = dut.BITS.value
         step = dut.STEPS.value
         dut.angle.value = f_point(angle, res - 2)
-        await ClockCycles(dut.clk, 3)        
-        assert abs(int(dut.sinus) - f_point(sin(angle) / 0.6072540283203125, res-2)) <= 2
-        assert abs(int(dut.cosinus) - f_point(cos(angle) / 0.6072540283203125, res-2)) <= 2
+        await ClockCycles(dut.clk, 3)
+        assert (
+            abs(int(dut.sinus) - f_point(sin(angle) / 0.6072540283203125, res - 2)) <= 2
+        )
+        assert (
+            abs(int(dut.cosinus) - f_point(cos(angle) / 0.6072540283203125, res - 2))
+            <= 2
+        )

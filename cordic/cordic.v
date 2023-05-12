@@ -31,7 +31,6 @@ always @(posedge clk) begin
 	sinus <= sin;
 	cosinus <= cos;
 end
-	
 
 generate
 genvar i;

@@ -7,8 +7,8 @@ def f_point(n: float, shift: int, res: int = 16):
     Convert a float to a fixed point integer.
     """
     if n >= 0:
-	    return int(round(n * 2**shift, 0))
-    return int(round(2**(res+1)-1+n * 2**shift, 0))
+        return int(round(n * 2**shift, 0))
+    return int(round(2 ** (res + 1) - 1 + n * 2**shift, 0))
 
 
 def verilog_b(n: float, resolution: int):
@@ -32,6 +32,8 @@ if __name__ == "__main__":
             break
         print(f"{int(resolution/4)}'h{i:x} : atan <= {verilog_b(atan_i, resolution)};")
         cumul *= 1 / math.sqrt(1 + 2 ** (-2 * i))
-    print(f"Cumul: {verilog_b(cumul, resolution)}  ({f_point(cumul, resolution-2)/2**(resolution-2)})")
+    print(
+        f"Cumul: {verilog_b(cumul, resolution)}  ({f_point(cumul, resolution-2)/2**(resolution-2)})"
+    )
     print(f"pi  ={verilog_b(math.pi, resolution)}")
     print(f"pi/2={verilog_b(math.pi/2, resolution)}")
