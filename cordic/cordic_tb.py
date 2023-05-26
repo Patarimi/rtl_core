@@ -21,7 +21,7 @@ async def test_cordic_core(dut):
         dut.Bin.value = f_point(buff[0], res - 2)
         dut.Xin.value = f_point(buff[1], res - 2)
         dut.Yin.value = f_point(buff[2], res - 2)
-        for i in range(step - 1):
+        for i in range(step - 2):
             dut.step.value = i
             if buff[0] > 0:
                 tmp = (
