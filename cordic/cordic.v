@@ -13,21 +13,19 @@ reg signed [BITS:0] beta [STEPS:0];
 reg [BITS-1:0] Xm [STEPS:0];
 reg [BITS-1:0] Ym [STEPS:0];
 wire [BITS:0] cos, sin;
-reg [BITS:0] ang;
 reg cos_signe;
 
 // pi  =16'b1100100100010000;
 localparam pi_2=16'b0110010010001000;
 
-assign cos_signe = (ang > pi_2 ) || (ang < -pi_2);
-assign beta[0] = ang<0 ? -ang : ang;
+assign cos_signe = (angle > pi_2 ) || (angle < -pi_2);
+assign beta[0] = angle<0 ? -angle : angle;
 assign Xm[0] = {2'b1, 14'b0};
 assign Ym[0] = {16'b0};
 assign cos[BITS:0] = {1'b0, Xm[STEPS]};
-assign sin[BITS:0] = ang<0 ? -Ym[STEPS] : {1'b0, Ym[STEPS]};
+assign sin[BITS:0] = angle<0 ? -Ym[STEPS] : {1'b0, Ym[STEPS]};
 
 always @(posedge clk) begin
-	ang <= angle;
 	sinus <= sin;
 	cosinus <= cos;
 end
@@ -45,7 +43,6 @@ genvar i;
 					.Yout(Ym[i+1]));
 	end 
 endgenerate
-
 endmodule
 
 
@@ -54,7 +51,7 @@ module cordic_core
 #(
 	//run atan_table.py to update the table and the STEPS value after editing BITS.
 	parameter BITS = 16, // bit width of input and output data
-	parameter STEPS = 14 // number of step of the CORDIC algorithm
+	parameter STEPS = 15 // number of step of the CORDIC algorithm
 )
 (
 	input  signed [BITS:0] Bin,   //angle from previous step (angle to be compute for first step)
@@ -94,7 +91,7 @@ endmodule
 module atan_table
 #(
 	parameter BITS = 16,
-	parameter STEPS = 14
+	parameter STEPS = 15
 )(
 	input  [$clog2(STEPS)-1:0] step,
 	output reg [BITS-1:0] atan
@@ -116,6 +113,7 @@ always @(step) begin
 		4'hb : atan <= 16'b0000000000001000;
 		4'hc : atan <= 16'b0000000000000100;
 		4'hd : atan <= 16'b0000000000000010;
+		4'he : atan <= 16'b0000000000000001;
 	endcase
 end
 endmodule

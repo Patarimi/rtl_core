@@ -9,6 +9,7 @@ packages = [{include = "rtl_core"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+myhdl = "^0.11"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -17,6 +18,7 @@ cocotb = "^1.7.2"
 cocotb-test = {git = "https://github.com/themperek/cocotb-test.git"}
 pytest = "^7.3.1"
 pytest-sugar = "^0.9.7"
+poethepoet = "^0.20.0"
 
 
 [build-system]
