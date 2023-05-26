@@ -48,8 +48,8 @@ def jc2(
 
 
 if __name__ == "__main__":
-    goLeft, goRight, stop, clk = [Signal(not ACTIVE) for i in range(4)]
+    go_left, go_right, stop, clk = [Signal(not ACTIVE) for i in range(4)]
     q = Signal(intbv(0)[4:])
-    jc2_inst = jc2(goLeft, goRight, stop, clk, q)
-    jc2_inst.convert(hdl='Verilog')
-    jc2_inst.convert(hdl='VHDL')
+    jc2_inst = jc2(go_left, go_right, stop, clk, q)
+    jc2_inst.convert(hdl="Verilog")
+    jc2_inst.convert(hdl="VHDL")
