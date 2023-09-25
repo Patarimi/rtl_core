@@ -18,7 +18,7 @@ cocotb = "^1.8.0"
 cocotb-test = {git = "https://github.com/themperek/cocotb-test.git"}
 pytest = "^7.4.2"
 pytest-sugar = "^0.9.7"
-poethepoet = "^0.22.1"
+poethepoet = "^0.23.0"
 
 
 [build-system]
