@@ -14,7 +14,7 @@ myhdl = "^0.11"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.9.1"
-cocotb = "^1.8.0"
+cocotb = "^1.8.1"
 cocotb-test = {git = "https://github.com/themperek/cocotb-test.git"}
 pytest = "^7.4.2"
 pytest-sugar = "^0.9.7"

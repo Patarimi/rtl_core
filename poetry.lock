@@ -62,42 +62,47 @@ colorama = {version = "*", markers = "platform_system == \"Windows\""}
 
 [[package]]
 name = "cocotb"
-version = "1.8.0"
+version = "1.8.1"
 description = "cocotb is a coroutine based cosimulation library for writing VHDL and Verilog testbenches in Python."
 optional = false
 python-versions = ">=3.6"
 files = [
-    {file = "cocotb-1.8.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:0321f18e8e399dd011d4f2bfea8d3fbdfd19c8217a368867a43e586763af0be1"},
-    {file = "cocotb-1.8.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a9546cb1d05c247cb726fc3479cd031b84a80822163304037d6fcc6f517e3340"},
-    {file = "cocotb-1.8.0-cp310-cp310-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:561d1146701b1526288c10b885a136e425b644cb7ef03db22bed3d47066270d8"},
-    {file = "cocotb-1.8.0-cp310-cp310-win32.whl", hash = "sha256:38c8ad50cfe00180296b7d3a9414b54f6127d6c82d600a547e4cced28c5b4b87"},
-    {file = "cocotb-1.8.0-cp310-cp310-win_amd64.whl", hash = "sha256:19dab657c314664e012f1d9f7d3ef78c8f01b030c5ba9f89b48488584768757b"},
-    {file = "cocotb-1.8.0-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:65e92655403b2e6ea18fbd8cfeea1a0a708db9402334ae7d812f1b687092ef66"},
-    {file = "cocotb-1.8.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:caee9f42cd645236257205b9435ea46043174c6970e59b1182b5fb27820ffb16"},
-    {file = "cocotb-1.8.0-cp311-cp311-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:632ac31d87d191d3339ca291354e17128c4de2857237fd020dcd1bdf018cbe2c"},
-    {file = "cocotb-1.8.0-cp311-cp311-win32.whl", hash = "sha256:bfe75aea1e82ef6aeb2fbc300ca9a0c5f25b5b89031fb7782c5f067318b10d53"},
-    {file = "cocotb-1.8.0-cp311-cp311-win_amd64.whl", hash = "sha256:40bd06d1f0a2bf53a590eccf0229286f47be7208c401d209a190d020f82fd074"},
-    {file = "cocotb-1.8.0-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:cccab7fd2835e39c9680df672446883b4ae3b8359574f371699853ed4aa7547f"},
-    {file = "cocotb-1.8.0-cp36-cp36m-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:99ae6d53d900c13f5f26e4b40fc7040edadf7c04786118e68f163dddbe6b78f5"},
-    {file = "cocotb-1.8.0-cp36-cp36m-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:caa511e5bf58b6b41453a46965cc49fd7b943e398edd3df4516c89f24e381862"},
-    {file = "cocotb-1.8.0-cp36-cp36m-win32.whl", hash = "sha256:17dd8bca4ac9e4ef6085d5be15172191d8d55c56ad15f5d1d7afd007bc40408f"},
-    {file = "cocotb-1.8.0-cp36-cp36m-win_amd64.whl", hash = "sha256:fa82154e4526fb5fe884bef33bd21ab91130a1dbb109e11d5ef32fa49dd5c865"},
-    {file = "cocotb-1.8.0-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:9daf891facef23536e600ce98ad43169452224d1b9aa847488c37b2da9fe9506"},
-    {file = "cocotb-1.8.0-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:af6bd03561fb819eb7b4f2080fada2315df3a7c4833380a743dabe7266384068"},
-    {file = "cocotb-1.8.0-cp37-cp37m-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:575b388a4461cc96dfe5b919a19b567bd2f6b6162aefd279be690a0cd7edda4c"},
-    {file = "cocotb-1.8.0-cp37-cp37m-win32.whl", hash = "sha256:9345c58ed2bb60fe89064bdf27ed7c6c5b642fb81dc6520640301b5e4f8b1486"},
-    {file = "cocotb-1.8.0-cp37-cp37m-win_amd64.whl", hash = "sha256:cbb335b7d6d1806da27f213dcb7d05f4841e07e490c5d6456f4d9a90e0acc109"},
-    {file = "cocotb-1.8.0-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:94b5d2f2c940b2b81d04cd3e448a2ce445e02ae13304f31eafdd694e148dcd70"},
-    {file = "cocotb-1.8.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:0dcf0dda9d21caeeb34b0be69167b2e0034fe9da524945c3a67f58487acd8027"},
-    {file = "cocotb-1.8.0-cp38-cp38-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:f9d126b0fa0d15fe2234b1c65665c5ffa53aa2ca9b16f80d96faddd145235620"},
-    {file = "cocotb-1.8.0-cp38-cp38-win32.whl", hash = "sha256:9b8c1c169acef36c56b861f2d1c296842b89a3d7e5bb4e0ec4eff79a914de780"},
-    {file = "cocotb-1.8.0-cp38-cp38-win_amd64.whl", hash = "sha256:ee4342cecd3a265a45334f127c66223609288cc3a8c138fc65d89d9ba74f8de5"},
-    {file = "cocotb-1.8.0-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:cf8ccbc4a7afba4c18714f4ba44af723110e26087c1b355b2056c6a58614a77d"},
-    {file = "cocotb-1.8.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:4d64992f656ef42b480e71f6445f1c122e54a4ac2a2de28dcdbf596794636243"},
-    {file = "cocotb-1.8.0-cp39-cp39-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:c356d1556d1266822fbcb21361ba1449087e758a66b83b34b03d41e648060634"},
-    {file = "cocotb-1.8.0-cp39-cp39-win32.whl", hash = "sha256:997f1734d1bcc7924f1d931793e95d17bc46e5ee47ce566ae7584168d3db41d2"},
-    {file = "cocotb-1.8.0-cp39-cp39-win_amd64.whl", hash = "sha256:81b7b10965916271646a2c1d975596558d15b107e5337fe566ffe9262289a4d7"},
-    {file = "cocotb-1.8.0.tar.gz", hash = "sha256:6e6495997ddb737dbcd47aa00b29d11f2237df8521e9b52064e8f59641231b4a"},
+    {file = "cocotb-1.8.1-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:06ae2b2d899095ee4fd4f9604e0fd3706102ef681659f8dc68e4faf6d990d89f"},
+    {file = "cocotb-1.8.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f8d642e1106750a519c015c651ec94a5d9008da0a29d39b2d073206bd60ce452"},
+    {file = "cocotb-1.8.1-cp310-cp310-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:de9d329e747048ae8d9c08794cc2ee48850b13c387d647227ff76ac2df184fcb"},
+    {file = "cocotb-1.8.1-cp310-cp310-win32.whl", hash = "sha256:87cb47d81d6c55f64662512dda8088e5f430740a42feaa67f7b8e10bd249c02c"},
+    {file = "cocotb-1.8.1-cp310-cp310-win_amd64.whl", hash = "sha256:8b0643be8b1dee02453233a40ad94919f5781bcb08893689c99b9c7ab08695f3"},
+    {file = "cocotb-1.8.1-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:708cb6fcb2ee00fe80bd45a03f2a202980d2b563dcb064c2f3c904c84e87e2b1"},
+    {file = "cocotb-1.8.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:4a6d3d824c746410da8f294c34dcca820f1350c1639cafb4b6394844a07f7371"},
+    {file = "cocotb-1.8.1-cp311-cp311-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:a3a9e442211691a3602dd8cce288e9b66f2bab220bc01d1b17e5f30db4a9622c"},
+    {file = "cocotb-1.8.1-cp311-cp311-win32.whl", hash = "sha256:7d47c3aa3432575eb26f6783ef7832a6db873265fd40a89ade22599e59a784f6"},
+    {file = "cocotb-1.8.1-cp311-cp311-win_amd64.whl", hash = "sha256:9ffebe392a4f0cb757ccea51d4902db9abc537e57b9151c5ecc8b4f898ec7817"},
+    {file = "cocotb-1.8.1-cp312-cp312-macosx_10_9_x86_64.whl", hash = "sha256:9d70978a5c587fc26c66c3f0e8a5bc0545a70397cbfd15b342685fed38959fc1"},
+    {file = "cocotb-1.8.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:5692e56925de8d71ce8d379bd80a2e103fe0fba1e0c4c3b539b10eafe22fb6c1"},
+    {file = "cocotb-1.8.1-cp312-cp312-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:4cbfb462315b12f157381c388f3ab5a074c0293e54852f8851152bf295bf6807"},
+    {file = "cocotb-1.8.1-cp312-cp312-win32.whl", hash = "sha256:ac5fa8f47613c1487156d20fb09d4679566572922971ea922ec5acec38629fa9"},
+    {file = "cocotb-1.8.1-cp312-cp312-win_amd64.whl", hash = "sha256:b9e7a09d0f76115f02d9c957110d5970e759c2bc8d1d5a448716ed3a67a66367"},
+    {file = "cocotb-1.8.1-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:34da6f570c584434e34fe98f1b03cd394c2e43302c85a5510c6aebc5bffd679a"},
+    {file = "cocotb-1.8.1-cp36-cp36m-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:4f8f7401f107e04fb5f1c1bbb6a4434d11fff4bfe6871bea8a822b3ec91e7885"},
+    {file = "cocotb-1.8.1-cp36-cp36m-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:2343642030caf03b707eb7ee665de3adcffab08c5884b40c363ae042e1aad3d4"},
+    {file = "cocotb-1.8.1-cp36-cp36m-win32.whl", hash = "sha256:ab136393aa5776a9a6f25d94af62dd947791482d325516072288668741be934b"},
+    {file = "cocotb-1.8.1-cp36-cp36m-win_amd64.whl", hash = "sha256:1d3af65372ed044f27b69039325bf018738685e59be928fb4efde0c0e86b1ba0"},
+    {file = "cocotb-1.8.1-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:e8d9525a92312d8271fc612c98ce027d285c3f93925f63908c4e9af72a9ba5eb"},
+    {file = "cocotb-1.8.1-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:bfa07a47e6b0654ed65e06b37b93316cc3afb7d9b52fe5c07579edd10bdb6281"},
+    {file = "cocotb-1.8.1-cp37-cp37m-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:298f4e3c0eafda1964112d050cf08827f5aa3c3759960bef1cdce1c57ce645d4"},
+    {file = "cocotb-1.8.1-cp37-cp37m-win32.whl", hash = "sha256:174209743e2743a4c1adb885bb212bb40447464a54388cae360225cb4353499b"},
+    {file = "cocotb-1.8.1-cp37-cp37m-win_amd64.whl", hash = "sha256:71a6a2e39596fe6f2094cc3d4fc35621a6c1e74ca70dc868973a71c6f77f3bdb"},
+    {file = "cocotb-1.8.1-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:f3a6f6f0fa5914c491d22d5796f15b5d0b152f76c071fecb3665af60b471bbe7"},
+    {file = "cocotb-1.8.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:1196ba5f341c4e6752e4db71e99932499980a907ec264387d75c6f37d3e09ab6"},
+    {file = "cocotb-1.8.1-cp38-cp38-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:b1ba54da9217b2231d58a380b19f5bc749f6b1d1b21460bc0951d0c1317a2f5d"},
+    {file = "cocotb-1.8.1-cp38-cp38-win32.whl", hash = "sha256:032569407d22b55a1d7acb07b1be12e2010e332c49d2c04404707d10d892cc27"},
+    {file = "cocotb-1.8.1-cp38-cp38-win_amd64.whl", hash = "sha256:b70d8c803c7215bd54249e53b2591b484346420168dd1cafdb2e0d27e214db11"},
+    {file = "cocotb-1.8.1-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:cbe760f6a0869140a7fa2124c295e2a4299300f0f839017e6b43ab4490bbc522"},
+    {file = "cocotb-1.8.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:d2a05df85a5259654d2c10cc0ac8ad877b6ca986fb559a911a9207bcdbc887fd"},
+    {file = "cocotb-1.8.1-cp39-cp39-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:59cb5e35533b28301e1ff1858aabe1d6bac4305536d5fc40edb188dfda42e0ae"},
+    {file = "cocotb-1.8.1-cp39-cp39-win32.whl", hash = "sha256:2824f26d15713056de44507017f88189419cf7b68252cedbdbed272ee753917f"},
+    {file = "cocotb-1.8.1-cp39-cp39-win_amd64.whl", hash = "sha256:797044b85d5efc56bad7ff789f1811990e67de22fbec614ac37009a9aa608ce5"},
+    {file = "cocotb-1.8.1.tar.gz", hash = "sha256:1499dbe0d4d10676bc9b234861e1df171a7f02aca6b696b5fadf01fe61e3a4f6"},
 ]
 
 [package.dependencies]
@@ -355,4 +360,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "79d3719ce3cfb118cb4b32795aff3c36acc5613175c942cdcbd65af136d75e04"
+content-hash = "8f45cc8be4a8cb4b4dfe4f9420241cd225e9a5322c2a990f23e209d141e83898"
