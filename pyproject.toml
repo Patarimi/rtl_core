@@ -10,6 +10,7 @@ packages = [{include = "rtl_core"}]
 [tool.poetry.dependencies]
 python = "^3.8"
 myhdl = "^0.11"
+migen = {git = "https://github.com/m-labs/migen.git"}
 
 
 [tool.poetry.group.dev.dependencies]
